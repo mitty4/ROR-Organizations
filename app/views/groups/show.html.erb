@@ -1,0 +1,15 @@
+<a href="/show">Dashboard</a>
+<a href="/logout">Logout</a></br></br>
+
+<%= @org.name %>
+
+
+	<a href="/groups/<%= @org.id %>/join">Join Group</a></br>
+	<a href="/groups/<%= @org.id %>/leave">Leave Group</a></br>
+
+<%= @org.description %></br></br>
+Created By: <%= @org.creator %></br></br>
+Members:<% @org.users.each do |member| %><ul>
+	<li><%= member.given_name %></li>
+<% end %></ul>
+

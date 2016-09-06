@@ -1,0 +1,32 @@
+<h1>Hi, <%= @user.given_name %>!</h1>
+<a href="/logout">Logout</a>
+<a href="users/delete">Delete User</a>
+
+<p>Here are the organizations you may join:</p>
+
+<% if @orgs %>
+	<% @orgs.each do |org| %>
+		<% if org %>
+			<% @check = User.find_by_given_name(org.creator).id %>
+			<% if @check == session[:id] %>
+				<a href="/orgs/<%= org.id %>/delete">Delete</a>
+			<% end %>
+			
+			<a href="/groups/<%= org.id %>/group"><%= org.name %></a></br>
+			Members: <%= org.users.count %></br>
+			<%= org.description %></br>
+		<% end %>
+	<% end %>
+<% end %></br>
+
+<p>Create a New Organization</p>
+
+<% if flash[:new_org] %>
+	<%= flash[:new_org] %>
+<% end %>
+<form action="/orgs/create" method="post">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+	Org Name: <input type="text" name="org[name]">
+	Description: <input type="text" name="org[description]">
+	<input type="submit" name="create">
+</form>
