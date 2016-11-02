@@ -26,9 +26,14 @@ class UsersController < ApplicationController
   end
 
   def delete
-  	User.destroy(session[:id])
-  	@org = Org.find(session[:id])
-  	@org.destroy_all
+    user = User.find(session[:id])
+    User.destroy(session[:id])
+    email = user[:email]
+    puts email
+
+    org = Org.where(creator: email).all
+    puts org[0][:name]+org[1][:name]
+  	org.destroy_all
   	redirect_to '/main'
   end	
 

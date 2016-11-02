@@ -1,17 +1,6 @@
 Rails.application.routes.draw do
 
-  get 'groups/:id/group'=>'groups#group'
-
-  get 'groups/:id/join'=>'groups#join'
-
-  get 'groups/:id/leave'=>'groups#leave'
-
-  get '/show'=>'orgs#show'
-
-  post 'orgs/create'=>'orgs#create'
-
-  get 'orgs/:id/delete'=>'orgs#delete'
-
+#Users CTRL begins
   get '/main'=>'users#main'
 
   post '/login'=>'users#login'
@@ -23,6 +12,19 @@ Rails.application.routes.draw do
   patch '/users/update'
 
   get '/logout'=>'users#logout'
+
+#Org CTRL begins
+  get 'groups/:id/group'=>'groups#group'
+
+  get 'groups/:id/join'=>'groups#join'
+
+  get 'groups/:id/leave'=>'groups#leave'
+
+  get '/show'=>'orgs#show'
+
+  post 'orgs/create'=>'orgs#create'
+
+  get 'orgs/:id/delete'=>'orgs#delete'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

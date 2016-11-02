@@ -7,7 +7,7 @@ class OrgsController < ApplicationController
 
   def create
   	@user = User.find(session[:id])
-  	params[:org][:creator] = @user.given_name
+  	params[:org][:creator] = @user.email
   	@org = Org.new(org_params)
   	if @org.save
 	  	data={

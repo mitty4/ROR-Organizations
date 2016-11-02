@@ -1,32 +1,73 @@
-<h1>Hi, <%= @user.given_name %>!</h1>
-<a href="/logout">Logout</a>
-<a href="users/delete">Delete User</a>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Join!</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+	<div class="header jumbotron col-xs-12">
+		<div class="logout text-right col-xs-11">
+			<a class="text-warning" href="/logout">Logout </a><br />
+			<a class="text-danger" href="users/delete">Delete User</a>
+		</div>		
+		<h1 class="col-xs-12">Hi, <%= @user.given_name %>!</h1>
+		<h3 class="col-xs-12">Join as many as you'd like:</h3>
+	</div>
 
-<p>Here are the organizations you may join:</p>
+	<div class="content well col-xs-12">	
+		<div class="org col-xs-12 col-sm-6">
+			<% if @orgs %>
+			<h2>Organizations</h2>
+				<% @orgs.each do |org| %>
+					<% if org %>
+						<% @check = User.find_by_email(org.creator).id %>
+						<div class="title col-xs-12">
+							<p><u><a class="" style="font-size: 1.5em" href="/groups/<%= org.id %>/group"><%= org.name %></a></u>
+							<span class="">Members: <%= org.users.count %></span>
+							</p>
 
-<% if @orgs %>
-	<% @orgs.each do |org| %>
-		<% if org %>
-			<% @check = User.find_by_given_name(org.creator).id %>
-			<% if @check == session[:id] %>
-				<a href="/orgs/<%= org.id %>/delete">Delete</a>
+							<% if @check == session[:id] %>
+								<a class="text-danger pull-right" href="/orgs/<%= org.id %>/delete">Delete</a>
+							<% end %>
+						
+						<h5><%= org.description %></h5>
+						</div>				
+						
+					<% end %>
+				<% end %>
+			<% end %></br>
+		</div>
+
+		<div class="right col-xs-12 col-sm-4 well">
+			<h3>Create a New Organization</h3>
+
+			<% if flash[:new_org] %>
+				<p class="text-danger col-xs-12"> *<%= flash[:new_org] %></p>
 			<% end %>
-			
-			<a href="/groups/<%= org.id %>/group"><%= org.name %></a></br>
-			Members: <%= org.users.count %></br>
-			<%= org.description %></br>
-		<% end %>
-	<% end %>
-<% end %></br>
+			<form class="col-xs-12" action="/orgs/create" method="post">
+				<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+				<div class="form-group">
+				Org Name: <input class="" type="text" name="org[name]">
+				</div>
+				<div class="form-group">
+				Description: <input class="" type="text" name="org[description]">
+				</div>
+				<input class="btn btn-primary" type="submit" name="create">
+			</form>
+		</div>	
+	</div>	
+</body>
+</html>
 
-<p>Create a New Organization</p>
 
-<% if flash[:new_org] %>
-	<%= flash[:new_org] %>
-<% end %>
-<form action="/orgs/create" method="post">
-	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-	Org Name: <input type="text" name="org[name]">
-	Description: <input type="text" name="org[description]">
-	<input type="submit" name="create">
-</form>
+
+
+
+
+
+
+
+
+
+
+
