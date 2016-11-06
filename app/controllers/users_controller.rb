@@ -1,6 +1,4 @@
 class UsersController < ApplicationController
-  def main
-  end
 
   def login
   	 @user = User.find_by_email(params[:user][:email])
@@ -10,7 +8,7 @@ class UsersController < ApplicationController
 	else
 		flash[:login] = 'invalid combination'
 		@user = nil
-    	redirect_to '/main'
+    	redirect_to '/'
 	end
   end
 
@@ -21,7 +19,7 @@ class UsersController < ApplicationController
   		redirect_to '/show' and return
   	else
   		flash[:create] = @user.errors.full_messages
-  		redirect_to '/main' and return
+  		redirect_to '/' and return
   	end
   end
 
@@ -29,17 +27,15 @@ class UsersController < ApplicationController
     user = User.find(session[:id])
     User.destroy(session[:id])
     email = user[:email]
-    puts email
 
     org = Org.where(creator: email).all
-    puts org[0][:name]+org[1][:name]
   	org.destroy_all
-  	redirect_to '/main'
+  	redirect_to '/'
   end	
 
   def logout
   	session[:id] = nil
-  	redirect_to '/main'
+  	redirect_to '/'
   end
 
  private

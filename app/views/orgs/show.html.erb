@@ -6,11 +6,11 @@
 </head>
 <body>
 	<div class="header jumbotron col-xs-12">
-		<div class="logout text-right col-xs-11">
+		<h1 class="col-xs-6">Hi, <%= @user.given_name %>!</h1>
+		<div class="logout text-right container col-xs-6">
 			<a class="text-warning" href="/logout">Logout </a><br />
 			<a class="text-danger" href="users/delete">Delete User</a>
 		</div>		
-		<h1 class="col-xs-12">Hi, <%= @user.given_name %>!</h1>
 		<h3 class="col-xs-12">Join as many as you'd like:</h3>
 	</div>
 
@@ -30,7 +30,7 @@
 								<a class="text-danger pull-right" href="/orgs/<%= org.id %>/delete">Delete</a>
 							<% end %>
 						
-						<h5><%= org.description %></h5>
+							<h5><%= org.description %></h5>
 						</div>				
 						
 					<% end %>

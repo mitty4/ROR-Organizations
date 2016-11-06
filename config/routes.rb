@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
-#Users CTRL begins
-  get '/main'=>'users#main'
+#Users Controller
+  root 'users#main'
 
   post '/login'=>'users#login'
 
@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   get '/logout'=>'users#logout'
 
-#Org CTRL begins
+#Org Controller
   get 'groups/:id/group'=>'groups#group'
 
   get 'groups/:id/join'=>'groups#join'

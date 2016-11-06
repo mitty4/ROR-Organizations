@@ -26,7 +26,7 @@ class OrgsController < ApplicationController
   	Org.destroy(params[:id])
   	redirect_to '/show'
   end
-
+private
   def org_params
   	params.require(:org).permit(:name, :description, :creator)
   end
