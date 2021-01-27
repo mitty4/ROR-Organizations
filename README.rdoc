@@ -1,17 +1,11 @@
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-Here is a quick explanation of this application:
-	"Groups" is an app that allows for creation and joining of organizations with the option to view the other current members. 
+This app allows for creation and joining of organizations with the option to view the other current members. 
 
 Only the creator of the group can delete it
 
 Similarly, when a user deletes his account, all his created groups are deleted with it
 
 This app was developed with Ruby on rails, Postgres and Bootstrap
+
+
+	
 
